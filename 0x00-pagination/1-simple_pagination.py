@@ -35,4 +35,14 @@ class Server:
         return tuple(new_list)
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            pass
+        """ returns an empty list """
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
+        self.dataset()
+        pages = self.index_range(page, page_size)
+        data = []
+        if pages[-1] > len(self.__dataset):
+            return []
+        for i in range(pages[0], pages[-1]):
+            data.append(self.__dataset[i])
+        return data
